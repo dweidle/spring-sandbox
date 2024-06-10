@@ -1,0 +1,16 @@
+logging:
+  level:
+    root: info
+spring:
+  datasource:
+    username: postgres
+    password: mysecretpassword
+    url: jdbc:postgresql://localhost:5433/postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      #jdbc.time_zone: UTC
+      hibernate.default_schema: public
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
