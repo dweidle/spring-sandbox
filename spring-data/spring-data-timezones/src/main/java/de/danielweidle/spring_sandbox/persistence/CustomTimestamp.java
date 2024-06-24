@@ -13,8 +13,8 @@ import java.time.*;
 
 @Value
 @Embeddable
-@JsonSerialize(using = Mo360MesTimestamp.Mo360MesTimestampSerializer.class)
-public class Mo360MesTimestamp implements Serializable {
+@JsonSerialize(using = CustomTimestamp.CustomTimestampSerializer.class)
+public class CustomTimestamp implements Serializable {
 
     OffsetDateTime timestampUtc = OffsetDateTime.now(ZoneOffset.UTC);
     int offsetMinutesToUtc = offsetMinutesToUtc();
@@ -33,11 +33,11 @@ public class Mo360MesTimestamp implements Serializable {
         return atOrigin().toString();
     }
 
-    public static class Mo360MesTimestampSerializer extends JsonSerializer<Mo360MesTimestamp> {
+    public static class CustomTimestampSerializer extends JsonSerializer<CustomTimestamp> {
 
         @Override
-        public void serialize(Mo360MesTimestamp mo360MesTimestamp, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-            jsonGenerator.writeString(mo360MesTimestamp.toString());
+        public void serialize(CustomTimestamp customTimestamp, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+            jsonGenerator.writeString(customTimestamp.toString());
         }
     }
 }
