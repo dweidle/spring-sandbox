@@ -1,16 +1,18 @@
 package de.danielweidle.spring_sandbox.persistence;
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "time_zoned_entity")
-@Builder
 @Getter
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TimeZonedEntity {
 
@@ -20,15 +22,13 @@ public class TimeZonedEntity {
 
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    Date date;
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    OffsetDateTime offsetDateTime;
+    LocalDateTime now;
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride( name = "measuredAt", column = @Column(name = "some_date_measured_at", columnDefinition = "TIMESTAMP WITH TIME ZONE")),
-            @AttributeOverride( name = "offsetToUtc", column = @Column(name = "some_date_offset_to_utc"))
+            @AttributeOverride(name = "timestampUtc", column = @Column(name = "some_date_ts_utc", columnDefinition = "TIMESTAMP WITH TIME ZONE")),
+            @AttributeOverride(name = "offsetMinutesToUtc", column = @Column(name = "some_date_offset_minutes_to_utc"))
     })
-    DetailedOffsetDateTime someDate = new DetailedOffsetDateTime();
+    Mo360MesTimestamp someDate = new Mo360MesTimestamp();
 }

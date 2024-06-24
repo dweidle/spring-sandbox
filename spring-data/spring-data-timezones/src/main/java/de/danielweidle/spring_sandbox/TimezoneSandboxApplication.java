@@ -1,6 +1,6 @@
 package de.danielweidle.spring_sandbox;
 
-import de.danielweidle.spring_sandbox.persistence.DetailedOffsetDateTime;
+import de.danielweidle.spring_sandbox.persistence.Mo360MesTimestamp;
 import de.danielweidle.spring_sandbox.persistence.TimeZonedEntity;
 import de.danielweidle.spring_sandbox.persistence.TimeZonedEntityRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import java.time.*;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -48,7 +47,7 @@ public class TimezoneSandboxApplication {
 
         @Override
         public void afterPropertiesSet() throws Exception {
-            repo.saveAndFlush(new TimeZonedEntity(1, "Timezone specified with now()", new Date(),  OffsetDateTime.now(), new DetailedOffsetDateTime()));
+            repo.saveAndFlush(new TimeZonedEntity(1, "Timezone specified with now()", LocalDateTime.now(), new Mo360MesTimestamp()));
         }
     }
 }
